@@ -15,7 +15,7 @@ import com.rklaehn.ipfs._
 import com.rklaehn.ipfs.client.IPFS.PinType
 import akka.http.scaladsl.marshalling._
 import scala.concurrent.Future
-import io.circe.{jawn, Decoder, Json}
+import io.circe.{DecodingFailure, jawn, Decoder, Json}
 import de.heikoseeberger.akkahttpcirce.CirceSupport._
 
 class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
@@ -60,6 +60,8 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
 
   private def fail: Nothing = throw new IOException("Unexpected JSON")
 
+  private def decodeFail(failure: DecodingFailure): Nothing = throw new IOException(s"Unexpected JSON $failure")
+
   private def createEntity(data: Seq[(String, Source[ByteString, Any])]): Future[RequestEntity] = {
     def toBodyPart(name: String, data: Source[ByteString, Any]): BodyPart =
       BodyPart(name, HttpEntity.IndefiniteLength(MediaTypes.`application/octet-stream`, data))
@@ -78,10 +80,7 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
       entity.dataBytes.runFold(Vector.empty[A]) { case (seq, bytes) =>
         val text = bytes.utf8String
         val json = jawn.parse(text).toOption.get
-        seq :+ json.as[A].valueOr { x =>
-          println(x)
-          fail
-        }
+        seq :+ json.as[A].valueOr(decodeFail)
       }
     )
 
@@ -101,7 +100,7 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
   }
 
   def addFiles(files: File*): Future[Seq[MerkleNode]] = {
-    implicit val decodeMerkleNode: Decoder[MerkleNode] = Decoder.instance { c =>
+    val decodeMerkleNode: Decoder[MerkleNode] = Decoder.instance { c =>
       val res = for {
         key <- c.downField("Hash").as[Multihash]
         name <- c.downField("Name").as[Option[String]]
