@@ -33,6 +33,7 @@ lazy val commonSettings = Seq(
     |implicit val system = akka.actor.ActorSystem("test")
     |import system.dispatcher
     |val ipfs = IPFS("/ip4/127.0.0.1/tcp/5001")
+    |def p[T](f: scala.concurrent.Future[T]) = f.foreach(println)
     |""".stripMargin,
   publishTo <<= version { v =>
     val nexus = "https://oss.sonatype.org/"

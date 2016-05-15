@@ -1,0 +1,774 @@
+{
+  "Name" : "ipfs",
+  "Subcommands" : [
+    {
+      "Name" : "block",
+      "Subcommands" : [
+        {
+          "Name" : "get",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "put",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "stat",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "diag",
+      "Subcommands" : [
+        {
+          "Name" : "net",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "sys",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "log",
+      "Subcommands" : [
+        {
+          "Name" : "level",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "tail",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "update",
+      "Subcommands" : [
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "get",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "object",
+      "Subcommands" : [
+        {
+          "Name" : "data",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "links",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "get",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "put",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "stat",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "new",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "patch",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "bitswap",
+      "Subcommands" : [
+        {
+          "Name" : "stat",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "unwant",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "wantlist",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "add",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "cat",
+      "Subcommands" : [
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "ls",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "name",
+      "Subcommands" : [
+        {
+          "Name" : "publish",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "resolve",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            },
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "ping",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "tour",
+      "Subcommands" : [
+        {
+          "Name" : "restart",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "list",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "next",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "file",
+      "Subcommands" : [
+        {
+          "Name" : "ls",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "bootstrap",
+      "Subcommands" : [
+        {
+          "Name" : "list",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "add",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "rm",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "commands",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "id",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "resolve",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "tar",
+      "Subcommands" : [
+        {
+          "Name" : "add",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "cat",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "dns",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "pin",
+      "Subcommands" : [
+        {
+          "Name" : "rm",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "ls",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "add",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "version",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "config",
+      "Subcommands" : [
+        {
+          "Name" : "replace",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "show",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "edit",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "dht",
+      "Subcommands" : [
+        {
+          "Name" : "put",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "query",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "findprovs",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "findpeer",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "get",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "mount",
+      "Subcommands" : [
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "repo",
+      "Subcommands" : [
+        {
+          "Name" : "gc",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "stats",
+      "Subcommands" : [
+        {
+          "Name" : "bw",
+          "Subcommands" : [
+          ],
+          "Options" : [
+            {
+
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
+          ],
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "refs",
+      "Subcommands" : [
+        {
+          "Name" : "local",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "ShowOptions" : false
+    },
+    {
+      "Name" : "swarm",
+      "Subcommands" : [
+        {
+          "Name" : "connect",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "disconnect",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "filters",
+          "Subcommands" : [
+            {
+              "Name" : "add",
+              "Subcommands" : [
+              ],
+              "Options" : null,
+              "ShowOptions" : false
+            },
+            {
+              "Name" : "rm",
+              "Subcommands" : [
+              ],
+              "Options" : null,
+              "ShowOptions" : false
+            }
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "peers",
+          "Subcommands" : [
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        },
+        {
+          "Name" : "addrs",
+          "Subcommands" : [
+            {
+              "Name" : "local",
+              "Subcommands" : [
+              ],
+              "Options" : [
+                {
+
+                }
+              ],
+              "ShowOptions" : false
+            }
+          ],
+          "Options" : null,
+          "ShowOptions" : false
+        }
+      ],
+      "Options" : null,
+      "ShowOptions" : false
+    }
+  ],
+  "Options" : [
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    }
+  ],
+  "ShowOptions" : false
+}

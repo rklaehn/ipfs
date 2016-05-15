@@ -2,27 +2,13 @@ package com.rklaehn.ipfs
 
 import akka.util.ByteString
 
-final class MerkleNode(
+final case class MerkleNode(
     val hash: Multihash,
     val name: Option[String] = None,
     val size: Option[Int] = None,
     val `type`: Option[Int] = None,
     val links: Seq[MerkleNode] = Seq.empty,
     val data: Option[ByteString] = None) {
-
-  override def equals(other: Any): Boolean = other match {
-    case that: MerkleNode => this.asTuple == that.asTuple
-    case _ => false
-  }
-
-  override def hashCode(): Int =
-    asTuple.##
-
-  private def asTuple = (hash, name, size, `type`, links, data)
-}
-
-object MerkleNode {
-
 }
 
 /*
