@@ -97,18 +97,18 @@ object Protocol {
   }
   
   object Type {
-    object IP4 extends Type(4, 32, "ip4")
-    object TCP extends Type(6, 16, "tcp")
-    object UDP extends Type(17, 16, "udp")
-    object DCCP extends Type(33, 16, "dccp")
-    object IP6 extends Type(41, 128, "ip6")
-    object SCTP extends Type(132, 16, "sctp")
-    object UTP extends Type(301, 0, "utp")
-    object UDT extends Type(302, 0, "udt")
-    object IPFS extends Type(421, LENGTH_PREFIXED_VAR_SIZE, "ipfs")
-    object HTTPS extends Type(443, 0, "https")
-    object HTTP extends Type(480, 0, "http")
-    object ONION extends Type(444, 80, "onion")
+    case object IP4 extends Type(4, 32, "ip4")
+    case object TCP extends Type(6, 16, "tcp")
+    case object UDP extends Type(17, 16, "udp")
+    case object DCCP extends Type(33, 16, "dccp")
+    case object IP6 extends Type(41, 128, "ip6")
+    case object SCTP extends Type(132, 16, "sctp")
+    case object UTP extends Type(301, 0, "utp")
+    case object UDT extends Type(302, 0, "udt")
+    case object IPFS extends Type(421, LENGTH_PREFIXED_VAR_SIZE, "ipfs")
+    case object HTTPS extends Type(443, 0, "https")
+    case object HTTP extends Type(480, 0, "http")
+    case object ONION extends Type(444, 80, "onion")
 
     val values: Seq[Type] = Seq(IP4, TCP, UDP, DCCP, IP6, SCTP, UTP, UDT, IPFS, HTTPS, HTTP, ONION)
 

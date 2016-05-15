@@ -3,21 +3,20 @@ package com.rklaehn.ipfs.client
 import java.io.{File, IOException}
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.MediaTypes._
 import akka.http.scaladsl.model.Multipart.FormData.BodyPart
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.client.RequestBuilding._
-import akka.http.scaladsl.unmarshalling.Unmarshal
+import akka.http.scaladsl.unmarshalling._
 import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.{Sink, Source}
+import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import com.rklaehn.ipfs._
 import com.rklaehn.ipfs.client.IPFS.PinType
-import scala.concurrent.duration._
 import akka.http.scaladsl.marshalling._
 import scala.concurrent.Future
-import _root_.io.circe.{HCursor, Decoder, Json}
+import io.circe.{jawn, Decoder, Json}
 import de.heikoseeberger.akkahttpcirce.CirceSupport._
-import akka._
 
 class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
 
@@ -61,11 +60,63 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
 
   private def fail: Nothing = throw new IOException("Unexpected JSON")
 
+  private def createEntity(data: Seq[(String, Source[ByteString, Any])]): Future[RequestEntity] = {
+    def toBodyPart(name: String, data: Source[ByteString, Any]): BodyPart =
+      BodyPart(name, HttpEntity.IndefiniteLength(MediaTypes.`application/octet-stream`, data))
+    val formData = Multipart.FormData(data.map((toBodyPart _).tupled): _*)
+    Marshal(formData).to[RequestEntity]
+  }
+
+  private def createEntityFromFiles(files: Seq[File]): Future[RequestEntity] = {
+    val parts = files.map(file => BodyPart.fromFile(file.getName, MediaTypes.`application/octet-stream`, file))
+    val formData: Multipart.FormData = Multipart.FormData(parts: _*)
+    Marshal(formData).to[RequestEntity]
+  }
+
+  private def unmarshalChunksRaw[A: Decoder]: FromEntityUnmarshaller[Seq[A]] =
+    Unmarshaller(implicit ec => entity =>
+      entity.dataBytes.runFold(Vector.empty[A]) { case (seq, bytes) =>
+        val text = bytes.utf8String
+        val json = jawn.parse(text).toOption.get
+        seq :+ json.as[A].valueOr { x =>
+          println(x)
+          fail
+        }
+      }
+    )
+
+  private def unmarshalChunks[A: Decoder]: FromEntityUnmarshaller[Seq[A]] =
+    unmarshalChunksRaw[A].forContentTypes(`application/json`)
+
   def cat(hash: Multihash): Future[Source[ByteString, Any]] =
     get(s"cat/$hash").map(_.entity.dataBytes)
 
   def get(hash: Multihash): Future[Source[ByteString, Any]] =
     get(s"get/$hash").map(_.entity.dataBytes)
+
+  def add(parts: Seq[(String, Source[ByteString, Any])]): Future[String] = {
+    createEntity(parts).flatMap(entity =>
+      post("add?stream-channels=true", entity).flatMap(responseToText)
+    )
+  }
+
+  def addFiles(files: File*): Future[Seq[MerkleNode]] = {
+    implicit val decodeMerkleNode: Decoder[MerkleNode] = Decoder.instance { c =>
+      val res = for {
+        key <- c.downField("Hash").as[Multihash]
+        name <- c.downField("Name").as[Option[String]]
+      } yield MerkleNode(key, name = name)
+      res
+    }
+    val parts = files.map(file => BodyPart.fromFile(file.getName, MediaTypes.`application/octet-stream`, file))
+    val formData: Multipart.FormData = Multipart.FormData(parts: _*)
+    val um: FromEntityUnmarshaller[Seq[MerkleNode]] = unmarshalChunks[MerkleNode](decodeMerkleNode)
+    Marshal(formData).to[RequestEntity].flatMap { entity =>
+      post("add?stream-channels=true", entity).flatMap(response =>
+        um(response.entity)
+      )
+    }
+  }
 
   object refs {
 
@@ -102,14 +153,6 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
 
   trait Block {
 
-    private def toBodyPart(name: String, data: Source[ByteString, Any]): BodyPart =
-      BodyPart(name, HttpEntity.IndefiniteLength(MediaTypes.`application/octet-stream`, data))
-
-    private def createEntity(data: Seq[(String, Source[ByteString, Any])]): Future[RequestEntity] = {
-      val formData = Multipart.FormData(data.map((toBodyPart _).tupled): _*)
-      Marshal(formData).to[RequestEntity]
-    }
-
     def get(hash: Multihash): Future[Source[ByteString, Any]] = {
       IPFS.this.get(s"block/get?stream-channels=true&arg=$hash").map(_.entity.dataBytes)
     }
@@ -125,11 +168,13 @@ class IPFS(host: String, port: Int, api: String)(implicit system: ActorSystem) {
     def putFiles(files: File*): Future[Seq[MerkleNode]] = {
       val parts = files.map(file => BodyPart.fromFile(file.getName, MediaTypes.`application/octet-stream`, file))
       val formData: Multipart.FormData = Multipart.FormData(parts: _*)
-      Marshal(formData).to[RequestEntity].flatMap(entity =>
-        postJson("block/put?stream-channels=true", entity).map(
-          _.as[MerkleNode].map(x => Seq(x)).getOrElse(fail)
+      val um: FromEntityUnmarshaller[Seq[MerkleNode]] = unmarshalChunks[MerkleNode]
+      Marshal(formData).to[RequestEntity].flatMap { entity =>
+        println(entity.contentType)
+        post("block/put?stream-channels=true", entity).flatMap(response =>
+          um(response.entity)
         )
-      )
+      }
     }
 
     def stat(hash: Multihash): Future[Json] =

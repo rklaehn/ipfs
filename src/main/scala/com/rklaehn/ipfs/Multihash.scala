@@ -63,12 +63,12 @@ object Multihash {
   sealed abstract class Type(val index: Int, val length: Int)
 
   object Type {
-    object Sha1 extends Type(0x11, 20)
-    object Sha2_256 extends Type(0x12, 32)
-    object Sha2_512 extends Type(0x13, 64)
-    object Sha3 extends Type(0x14, 64)
-    object Blake2b extends Type(0x40, 64)
-    object Blake2s extends Type(0x41, 32)
+    case object Sha1 extends Type(0x11, 20)
+    case object Sha2_256 extends Type(0x12, 32)
+    case object Sha2_512 extends Type(0x13, 64)
+    case object Sha3 extends Type(0x14, 64)
+    case object Blake2b extends Type(0x40, 64)
+    case object Blake2s extends Type(0x41, 32)
 
     val values: Seq[Type] = Seq(Sha1, Sha2_256, Sha2_512, Sha3, Blake2b,Blake2s)
 

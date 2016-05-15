@@ -27,13 +27,13 @@ lazy val commonSettings = Seq(
   publishMavenStyle := true,
   publishArtifact in Test := false,
   pomIncludeRepository := Function.const(false),
-  initialCommands in console := """
+  initialCommands in console in Test := """
     |import com.rklaehn.ipfs.client._
     |import com.rklaehn.ipfs._
+    |import com.rklaehn.ipfs.Test._
     |implicit val system = akka.actor.ActorSystem("test")
     |import system.dispatcher
     |val ipfs = IPFS("/ip4/127.0.0.1/tcp/5001")
-    |def p[T](f: scala.concurrent.Future[T]) = f.foreach(println)
     |""".stripMargin,
   publishTo <<= version { v =>
     val nexus = "https://oss.sonatype.org/"
